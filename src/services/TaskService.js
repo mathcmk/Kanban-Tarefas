@@ -7,7 +7,7 @@ export async function listarTarefas() {
         .select('id, titulo,horario, status, created_at')
         .order('created_at', { ascending: true })
 
-    if(error) {
+    if (error) {
         throw error
     }
 
@@ -26,11 +26,11 @@ export async function criarTarefa(tarefa) {
         .select()
         .single()
 
-    if(error) {
+    if (error) {
         throw error
     }
-    
-    return data 
+
+    return data
 }
 
 export async function atualizarStatusTarefa(id, status) {
@@ -44,10 +44,21 @@ export async function atualizarStatusTarefa(id, status) {
         .select()
         .single()
 
-    if(error) {
+    if (error) {
         throw error
     }
 
     return data
-    
+}
+
+export async function deletarTarefa(id) {
+
+    const { data, error } = await supabase
+        .from('tarefas')
+        .delete()
+        .eq('id', id)
+
+    if (error) {
+        throw error
+    }
 }

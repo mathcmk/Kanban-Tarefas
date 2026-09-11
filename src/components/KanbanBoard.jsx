@@ -1,6 +1,6 @@
 import KanbanColumn from './KanbanColumn'
 
-function KanbanBoard({ tarefas, onAvancar, emAtualizacao }) {
+function KanbanBoard({ tarefas, onAvancar, emAtualizacao, onRemover }) {
 
     const tarefasAFazer = tarefas.filter(
         (tarefa) => tarefa.status === 'a-fazer'
@@ -21,6 +21,7 @@ function KanbanBoard({ tarefas, onAvancar, emAtualizacao }) {
         tarefas={tarefasAFazer}
         onAvancar={onAvancar}
         emAtualizacao={emAtualizacao}
+        onRemover={onRemover}
         />
 
         <KanbanColumn 
@@ -28,6 +29,7 @@ function KanbanBoard({ tarefas, onAvancar, emAtualizacao }) {
         tarefas={tarefasEmAndamento}
         onAvancar={onAvancar}
         emAtualizacao={emAtualizacao}
+        onRemover={onRemover}
         />
 
         <KanbanColumn 
@@ -35,6 +37,7 @@ function KanbanBoard({ tarefas, onAvancar, emAtualizacao }) {
         tarefas={tarefasConcluidas}
         onAvancar={onAvancar}
         emAtualizacao={emAtualizacao}
+        onRemover={onRemover}
         />
     </section>
   )

@@ -250,6 +250,54 @@ select  {
   color: white;
 }
 
+.acoes-tarefas {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+
+  margin-top: 16px;
+}
+
+.btn-avancar {
+  background-color: yellow;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 30px;
+  cursor: pointer;
+  trasition: 0.2s;
+}
+
+.btn-remover {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-avancar:hover {
+  transform: translateY(-1px);
+  trasition: 0.2s;
+  background-color: green;
+  color: black;
+}
+
+.btn-remover:hover {
+  transform: translateY(-1px);
+  transition: 0.2s;
+  background-color: #780606;
+  color: white;
+}
+
+.btn-avancar:disabled {
+  background-color: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
 @media (max-width: 800px) {
   .pagina {
     padding: 24px 16px;

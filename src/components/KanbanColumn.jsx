@@ -1,6 +1,6 @@
 import TaskCard from './TaskCard'
 
-function KanbanColumn({ titulo, tarefas, onAvancar, emAtualizacao }) {
+function KanbanColumn({ titulo, tarefas, onAvancar, emAtualizacao, onRemover }) {
   return (
     <article className="coluna">
       <h2>{titulo}</h2>
@@ -12,6 +12,7 @@ function KanbanColumn({ titulo, tarefas, onAvancar, emAtualizacao }) {
             tarefa={tarefa}
             onAvancar={onAvancar}
             emAtualizacao={emAtualizacao}
+            onRemover={onRemover}
           />
         ))}
       </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import Header from './components/Header'
 import KanbanBoard from './components/KanbanBoard'
-import { criarTarefa, listarTarefas, atualizarStatusTarefa } from './services/TaskService'
+import { criarTarefa, listarTarefas, atualizarStatusTarefa, deletarTarefa } from './services/TaskService'
 import TaskForm from './components/TaskForm'
 
 
@@ -83,7 +83,7 @@ function App() {
     } catch (error) {
 
       console.error(error)
-    }finally{
+    } finally {
 
       setTarefaAtualizando(null)
     }
@@ -108,6 +108,24 @@ function App() {
       setErro('Não foi possível cadastrar a tarefa.')
     }
   }
+
+  async function removerTarefa(tarefa) {
+
+    try {
+
+      await deletarTarefa(tarefa.id)
+
+      setTarefas((tarefasAtuais) => {
+        return tarefasAtuais.filter((tarefaAtual) => {
+          return tarefaAtual.id !== tarefa.id
+        })
+      })
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
 
   return (
     <main className="pagina">
@@ -135,6 +153,7 @@ function App() {
           tarefas={tarefas}
           onAvancar={avancarTarefa}
           emAtualizacao={tarefaAtualizando}
+          onRemover={removerTarefa}
         />
       )}
     </main>
