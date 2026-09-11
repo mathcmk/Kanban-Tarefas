@@ -1,5 +1,11 @@
+import { useState } from "react"
+
+
 function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
+    
     const estaAtualizando = (tarefa.id === emAtualizacao)
+
+    const [tarefaParaRemover, setTarefaParaRemover] = useState(null)
 
     return (
         <div className="tarefa">
@@ -17,11 +23,25 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
                 </button>
 
                 <button
-                    onClick={() => onRemover(tarefa)}
+                    onClick={() => 
+                        setTarefaParaRemover(tarefa)}
                     className="btn-remover"
                 >
                     Remover
                 </button>
+
+                {tarefaParaRemover && (
+                    <div className="confirmacao-remocao">
+
+                        <h3>Remover Tarefa?</h3>
+
+                        <p>"Tem certeza que deseja excluir a tarefa " {tarefaParaRemover.titulo}?</p>
+
+                        <button>Cancelar</button>
+
+                        <button>Confirmar</button>
+                    </div>
+                )}
 
             </div>
 
