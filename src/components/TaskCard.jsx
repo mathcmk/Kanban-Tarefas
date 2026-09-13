@@ -1,16 +1,30 @@
 import { useState } from "react"
 
-
 function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
-    
+
+
+
     const estaAtualizando = (tarefa.id === emAtualizacao)
 
     const [tarefaParaRemover, setTarefaParaRemover] = useState(null)
 
+    const [erroRemocao, setErroRemocao] = useState('')
+
+
+    function cancelarRemocao() {
+        setTarefaParaRemover(null)
+        setErroRemocao('')
+    }
+
+    function iniciarRemocao(tarefa) {
+        setErroRemocao('')
+        setTarefaParaRemover(tarefa)
+    }
+
     return (
         <div className="tarefa">
             <h3>{tarefa.titulo}</h3>
-            <p>{tarefa.horario}</p>
+            <p className="horario-tarefa">{tarefa.horario}</p>
 
             <div className="acoes-tarefas">
 
@@ -23,25 +37,52 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
                 </button>
 
                 <button
-                    onClick={() => 
-                        setTarefaParaRemover(tarefa)}
+                    onClick={() =>
+                        iniciarRemocao(tarefa)}
                     className="btn-remover"
                 >
                     Remover
                 </button>
 
+
                 {tarefaParaRemover && (
-                    <div className="confirmacao-remocao">
+                    <div className='modal-overlay'>
 
-                        <h3>Remover Tarefa?</h3>
+                        <div className="confirmacao-remocao">
 
-                        <p>"Tem certeza que deseja excluir a tarefa " {tarefaParaRemover.titulo}?</p>
+                            <h3>Remover Tarefa?</h3>
 
-                        <button>Cancelar</button>
+                            <p className="menssagem-excluir">Tem certeza que deseja excluir a tarefa  "{tarefaParaRemover.titulo}" ?</p>
 
-                        <button>Confirmar</button>
+                            <div className="acoes-modal">
+                                <button className="botao-cancelar-overlay" onClick={cancelarRemocao}>
+                                    Cancelar
+                                </button>
+
+                                <button className="botao-confirmar-overlay" onClick={async () => {
+                                    try {
+                                        await onRemover(tarefaParaRemover)
+                                        setTarefaParaRemover(null)
+                                    } catch (error) {
+                                        console.error(error)
+                                        setErroRemocao(`Não foi possível remover a tarefa. ${tarefaParaRemover.titulo}`)
+                                    }
+                                }}
+                                >
+                                    Confirmar
+                                </button>
+
+                                {erroRemocao && (
+                                    <p className='mensagem-erro'>
+                                        {erroRemocao}
+                                    </p>
+                                )}
+
+                            </div>
+                        </div>
                     </div>
                 )}
+
 
             </div>
 
