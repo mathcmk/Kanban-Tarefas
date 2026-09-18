@@ -8,7 +8,9 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
 
     const [tarefaParaRemover, setTarefaParaRemover] = useState(null)
 
-    const [erroRemocao, setErroRemocao] = useState('')
+    const [erroRemocao, setErroRemocao] = useState('' )
+
+    const [estaRemovendo, setEstaRemovendo] = useState(false)
 
 
     function cancelarRemocao() {
@@ -19,6 +21,24 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
     function iniciarRemocao(tarefa) {
         setErroRemocao('')
         setTarefaParaRemover(tarefa)
+    }
+
+    async function confirmarRemocao() {
+
+        setEstaRemovendo(true)
+
+        try {
+            await onRemover(tarefaParaRemover)
+            setTarefaParaRemover(null)
+
+        } catch (error) {
+
+            console.error(error)
+            setErroRemocao(`Não foi possivel fazer a remoção da tarefa ${tarefaParaRemover.titulo}, aguarde um momento e tente novamente!`)
+
+        } finally {
+            setEstaRemovendo(false)
+        }
     }
 
     return (
@@ -54,29 +74,27 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
 
                             <p className="menssagem-excluir">Tem certeza que deseja excluir a tarefa  "{tarefaParaRemover.titulo}" ?</p>
 
+                            {erroRemocao && (
+                                <p className='erro-remocao-modal'>
+                                    {erroRemocao}
+                                </p>
+                            )}
+
                             <div className="acoes-modal">
-                                <button className="botao-cancelar-overlay" onClick={cancelarRemocao}>
+                                <button
+                                    className="botao-cancelar-overlay"
+                                    onClick={cancelarRemocao}
+                                    disabled={estaRemovendo}>
                                     Cancelar
                                 </button>
 
-                                <button className="botao-confirmar-overlay" onClick={async () => {
-                                    try {
-                                        await onRemover(tarefaParaRemover)
-                                        setTarefaParaRemover(null)
-                                    } catch (error) {
-                                        console.error(error)
-                                        setErroRemocao(`Não foi possível remover a tarefa. ${tarefaParaRemover.titulo}`)
-                                    }
-                                }}
-                                >
-                                    Confirmar
-                                </button>
+                                <button
+                                    className="botao-confirmar-overlay"
+                                    onClick={confirmarRemocao}
+                                    disabled={estaRemovendo} >
 
-                                {erroRemocao && (
-                                    <p className='mensagem-erro'>
-                                        {erroRemocao}
-                                    </p>
-                                )}
+                                    {estaRemovendo ? 'Removendo...' : 'Confirmar'}
+                                </button>
 
                             </div>
                         </div>

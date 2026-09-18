@@ -259,8 +259,8 @@ select {
 }
 
 .btn-avancar {
-  background-color: yellow;
-  color: black;
+  background-color: #3F7D58;
+  color: white;
   border: none;
   border-radius: 20px;
   padding: 6px 30px;
@@ -269,7 +269,7 @@ select {
 }
 
 .btn-remover {
-  background-color: red;
+  background-color: #B42318;
   color: white;
   border: none;
   border-radius: 20px;
@@ -311,11 +311,14 @@ select {
 }
 
 .confirmacao-remocao {
-  background-color: white;
+  background-color: #F7F8F5;
   width: 90%;
   max-width: 500px;
   padding: 40px;
   border-radius: 8px;
+   border-style: solid;
+  border-width: 4px;
+  border-color: #D1D5DB ;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -330,8 +333,8 @@ select {
   margin-bottom: 20px;
   font-size: 20px;
   font-weight: 600;
-  background-color: red;
-  color: white;
+  background-color: #FEE4E2;
+  color: #912018;
   width: 200px;
   padding: 7px 10px;
   border-radius: 30px;
@@ -344,8 +347,8 @@ select {
 }
 
 .botao-cancelar-overlay {
-  background-color: blue;
-  color: white;
+  background-color: #E5E7EB;
+  color: #374151;
   border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
@@ -353,7 +356,7 @@ select {
 }
 
 .botao-confirmar-overlay{
-  background-color: red;
+  background-color: #B42318;
   color: white;
   border-radius: 4px;
   padding: 10px 20px;
@@ -362,13 +365,27 @@ select {
 }
 
 .botao-cancelar-overlay:hover{
-  background-color: darkblue;
   transform: translateY(-1px);
 }
 
 .botao-confirmar-overlay:hover{
-  background-color: darkred;
   transform: transLateY(-1px);
+}
+
+.botao-cancelar-overlay:disabled,
+.botao-confirmar-overlay:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.erro-remocao-modal {
+  background-color: #FEE4E2;
+  color: #B42318;
+  padding: 15px;
+
+  border-left: 2px solid red;
+  border-radius: 8px;
 }
 
 
