@@ -3,14 +3,12 @@ import { useState } from "react"
 function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
 
 
+    const [tarefaParaRemover, setTarefaParaRemover] = useState(null)
+    const [erroRemocao, setErroRemocao] = useState('' )
+    const [estaRemovendo, setEstaRemovendo] = useState(false)
+
 
     const estaAtualizando = (tarefa.id === emAtualizacao)
-
-    const [tarefaParaRemover, setTarefaParaRemover] = useState(null)
-
-    const [erroRemocao, setErroRemocao] = useState('' )
-
-    const [estaRemovendo, setEstaRemovendo] = useState(false)
 
 
     function cancelarRemocao() {
@@ -18,9 +16,9 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
         setErroRemocao('')
     }
 
-    function iniciarRemocao(tarefa) {
+    function iniciarRemocao(tarefaSelecionada) {
         setErroRemocao('')
-        setTarefaParaRemover(tarefa)
+        setTarefaParaRemover(tarefaSelecionada)
     }
 
     async function confirmarRemocao() {
@@ -40,6 +38,7 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
             setEstaRemovendo(false)
         }
     }
+    
 
     return (
         <div className="tarefa">
