@@ -18,9 +18,9 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
         setErroRemocao('')
     }
 
-    function iniciarRemocao(tarefa) {
+    function iniciarRemocao(tarefaSelecionada) {
         setErroRemocao('')
-        setTarefaParaRemover(tarefa)
+        setTarefaParaRemover(tarefaSelecionada)
     }
 
     async function confirmarRemocao() {

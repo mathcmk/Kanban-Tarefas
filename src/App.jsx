@@ -1,10 +1,11 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 
+
 import Header from './components/Header'
 import KanbanBoard from './components/KanbanBoard'
-import { criarTarefa, listarTarefas, atualizarStatusTarefa, deletarTarefa } from './services/TaskService'
-import TaskForm from './components/TaskForm'
+import { criarTarefa, listarTarefas, atualizarStatusTarefa, deletarTarefa, editarTarefa } from './services/TaskService'
+import TaskForm from './components/TaskFormulario'
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState('')
   const [tarefaAtualizando, setTarefaAtualizando] = useState(null)
+  const [tarefaParaEditar, setTarefaParaEditar] = useState(null)
 
   useEffect(() => {
     async function carregarTarefasDoSupa() {
@@ -33,11 +35,13 @@ function App() {
   }, [])
 
   function abrirFormulario() {
+    setTarefaParaEditar(null)
     setFormularioAberto(true)
   }
 
   function fecharFormulario() {
     setFormularioAberto(false)
+    setTarefaParaEditar(null)
   }
 
   function obterProximoStatus(statusAtual) {
@@ -123,8 +127,36 @@ function App() {
 
     } catch (error) {
       console.error(error)
-      throw error 
+      throw error
     }
+  }
+
+  function iniciarEdicao(tarefa) {
+
+    setTarefaParaEditar(tarefa)
+    setFormularioAberto(true)
+
+ }
+
+  async function salvarEdicao(tarefaAtualizada) {
+
+    const tarefaEditadaNoSupa =
+      await editarTarefa(
+        tarefaAtualizada.id,
+        tarefaAtualizada
+      )
+
+    setTarefas((tarefasAtuais) => {
+      return tarefasAtuais.map((tarefaAtual) => {
+        if (tarefaAtual.id === tarefaEditadaNoSupa.id) {
+          return tarefaEditadaNoSupa
+        }
+        return tarefaAtual
+      })
+    })
+
+    setTarefaParaEditar(null)
+    setFormularioAberto(false)
   }
 
 
@@ -136,6 +168,8 @@ function App() {
         <TaskForm
           aoFechar={fecharFormulario}
           aoAdicionar={adicionarTarefa}
+          tarefaParaEditar={tarefaParaEditar}
+          aoSalvarEdicao={salvarEdicao}
         />
       )}
 
@@ -155,6 +189,7 @@ function App() {
           onAvancar={avancarTarefa}
           emAtualizacao={tarefaAtualizando}
           onRemover={removerTarefa}
+          onEditar={iniciarEdicao}
         />
       )}
     </main>

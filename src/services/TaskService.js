@@ -62,3 +62,25 @@ export async function deletarTarefa(id) {
         throw error
     }
 }
+
+
+export async function editarTarefa(id, tarefa) {
+
+    const { data, error } = await supabase
+        .from('tarefas')
+        .update({
+            titulo: tarefa.titulo,
+            status: tarefa.status,
+            horario: tarefa.horario
+        })
+        .eq('id', id)
+        .select()
+        .single()
+
+    if (error) {
+        console.error(error)
+        throw error
+    }
+
+    return data
+}

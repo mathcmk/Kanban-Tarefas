@@ -282,7 +282,7 @@ select {
   transform: translateY(-1px);
   trasition: 0.2s;
   background-color: green;
-  color: black;
+  color: white;
 }
 
 .btn-remover:hover {
