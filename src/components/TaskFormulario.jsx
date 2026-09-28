@@ -123,7 +123,9 @@ function TaskForm({
                             Cancelar
                         </button>
 
-                        <button type="submit" className="botao-adicionar">Adicionar</button>
+                        <button type="submit" className="botao-adicionar">
+                            {tarefaParaEditar === null ? 'Adicionar' : 'Editar Tarefa'}
+                            </button>
                     </div>
                 </form>
             </div>

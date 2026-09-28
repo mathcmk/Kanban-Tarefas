@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
+function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover, onEditar }) {
 
 
 
@@ -49,11 +49,12 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
             <div className="acoes-tarefas">
 
                 <button
-                    onClick={() => onAvancar(tarefa)}
-                    className="btn-avancar"
-                    disabled={estaAtualizando}>
-
-                    {estaAtualizando ? 'Atualizando...' : 'Avançar'}
+                    type="button" 
+                    className="btnEditar" 
+                    onClick={() => {
+                        onEditar(tarefa)
+                    }}>
+                        Editar
                 </button>
 
                 <button
@@ -62,6 +63,14 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover }) {
                     className="btn-remover"
                 >
                     Remover
+                </button>
+
+                <button
+                    onClick={() => onAvancar(tarefa)}
+                    className="btn-avancar"
+                    disabled={estaAtualizando}>
+
+                    {estaAtualizando ? 'Atualizando...' : 'Avançar'}
                 </button>
 
 
