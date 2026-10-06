@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover, onEditar }) {
+function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover, onEditar, onArrastar }) {
 
 
 
@@ -11,6 +11,8 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover, onEditar }) {
     const [erroRemocao, setErroRemocao] = useState('' )
 
     const [estaRemovendo, setEstaRemovendo] = useState(false)
+
+    
 
 
     function cancelarRemocao() {
@@ -42,7 +44,9 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover, onEditar }) {
     }
 
     return (
-        <div className="tarefa">
+        <div className="tarefa"
+        draggable
+        onDragStart={() => onArrastar(tarefa)}>
             <h3>{tarefa.titulo}</h3>
             <p className="horario-tarefa">{tarefa.horario}</p>
 
@@ -50,7 +54,7 @@ function TaskCard({ tarefa, onAvancar, emAtualizacao, onRemover, onEditar }) {
 
                 <button
                     type="button" 
-                    className="btnEditar" 
+                    className="btn-editar" 
                     onClick={() => {
                         onEditar(tarefa)
                     }}>

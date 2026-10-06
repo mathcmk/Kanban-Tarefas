@@ -1,6 +1,6 @@
 import KanbanColumn from './KanbanColumn'
 
-function KanbanBoard({ tarefas, onAvancar, emAtualizacao, onRemover, onEditar }) {
+function KanbanBoard({ tarefas, onAvancar, emAtualizacao, onRemover, onEditar, onArrastar }) {
 
     const tarefasAFazer = tarefas.filter(
         (tarefa) => tarefa.status === 'a-fazer'
@@ -23,6 +23,7 @@ function KanbanBoard({ tarefas, onAvancar, emAtualizacao, onRemover, onEditar })
         emAtualizacao={emAtualizacao}
         onRemover={onRemover}
         onEditar={onEditar}
+        onArrastar={onArrastar}
         />
 
         <KanbanColumn 
@@ -32,6 +33,7 @@ function KanbanBoard({ tarefas, onAvancar, emAtualizacao, onRemover, onEditar })
         emAtualizacao={emAtualizacao}
         onRemover={onRemover}
         onEditar={onEditar}
+        onArrastar={onArrastar}
         />
 
         <KanbanColumn 
@@ -41,6 +43,7 @@ function KanbanBoard({ tarefas, onAvancar, emAtualizacao, onRemover, onEditar })
         emAtualizacao={emAtualizacao}
         onRemover={onRemover}
         onEditar={onEditar}
+        onArrastar={onArrastar}
         />
     </section>
   )

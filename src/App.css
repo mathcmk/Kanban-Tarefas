@@ -278,6 +278,16 @@ select {
   transition: 0.2s;
 }
 
+.btn-editar {
+  background-color: yellow;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
 .btn-avancar:hover {
   transform: translateY(-1px);
   trasition: 0.2s;
@@ -290,6 +300,13 @@ select {
   transition: 0.2s;
   background-color: #780606;
   color: white;
+}
+
+.btn-editar:hover {
+  transform: translateY(-1px);
+  transition: 0.2s;
+  background-color: #636320;
+  color: yellow;
 }
 
 .btn-avancar:disabled {

@@ -10,11 +10,18 @@ import TaskForm from './components/TaskFormulario'
 
 function App() {
   const [tarefas, setTarefas] = useState([])
+
   const [formularioAberto, setFormularioAberto] = useState(false)
+
   const [carregando, setCarregando] = useState(true)
+
   const [erro, setErro] = useState('')
+
   const [tarefaAtualizando, setTarefaAtualizando] = useState(null)
+
   const [tarefaParaEditar, setTarefaParaEditar] = useState(null)
+
+  const [tarefaArrastando, settarefaArrastando] = useState(null)
 
   useEffect(() => {
     async function carregarTarefasDoSupa() {
@@ -33,6 +40,10 @@ function App() {
 
     carregarTarefasDoSupa()
   }, [])
+
+  function iniciarArrateTarefa(tarefa) {
+    settarefaArrastando(tarefa)
+  }
 
   function abrirFormulario() {
     setTarefaParaEditar(null)
@@ -190,6 +201,7 @@ function App() {
           emAtualizacao={tarefaAtualizando}
           onRemover={removerTarefa}
           onEditar={iniciarEdicao}
+          onArrartar={iniciarArrateTarefa}
         />
       )}
     </main>
